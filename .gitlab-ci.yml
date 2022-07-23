@@ -1,0 +1,20 @@
+image: ubuntu:20.04
+stages:
+  - deploy
+
+before_script:
+  - apt-get update -qq
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+build & deploy:
+  stage: deploy
+  only:
+    - main
+    - ci
+  script:
+    - ssh $SSH_USER@$SSH_HOST "sudo /home/build.sh && exit"

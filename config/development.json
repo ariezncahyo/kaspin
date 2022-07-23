@@ -1,0 +1,14 @@
+{
+  "moduleSpecific": {
+    "kaspin": {
+      "db": {
+        "host": "localhost",
+        "user": "postgres",
+        "name": "db_kaspin",
+        "dialect": "postgres"
+      },
+      "publicIp": "127.0.0.1",
+      "domain": "localhost"
+    }
+  }
+}

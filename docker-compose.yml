@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app_service:
+    image: node:14
+    container_name: backend-kaspin
+    env_file: .env
+    build: 
+      context: .
+    environment: 
+      - app_service.host=0.0.0.0
+    ports: 
+      - '6000:6000'
+    restart: on-failure
+      
+networks:
+  net:
+    driver: bridge
+
+
+
+
